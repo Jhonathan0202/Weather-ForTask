@@ -1,0 +1,305 @@
+@import url("./index.css");
+
+/* Define custom variable for input border color */
+:root {
+    --input-border-color: #ffffff1a;
+}
+
+div.card-wrapper {
+    margin: 10px;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 10px;
+}
+
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card > .card-content {
+    display: flex;
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    color: var(--color);
+    flex-flow: row nowrap;
+    gap: 20px;
+    justify-content: space-between;
+    padding: 10px;
+
+    & > div {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: baseline;
+        gap: 5px;
+        flex: 1;
+        min-width: 0;
+    }
+
+    & h2 {
+        font-size: 1rem;
+        text-align: left;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 100%;
+        overflow: hidden;
+        font-family: "Hanken Grotesk", sans-serif;
+    }
+
+    & p {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        color: #ffffff85;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        text-align: left;
+        max-height: 36px;
+        word-break: break-word;
+    }
+
+    & > span{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.card > .card-options {
+    display: none;
+}
+
+.card > .card-options.active {
+    display: block;
+}
+
+.card > .card-options > ul {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 1px;
+    list-style: none;
+    width: 100%;
+}
+
+.card > .card-options li {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+}
+
+.card > .card-options li > button {
+    background-color: transparent;
+    font-weight: 600;
+    color: var(--color);
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+
+.card > .card-options li:last-child > button {
+    color: #f85149;
+}
+
+.card > .card-options li > button.desable {
+    color: var(--gray);
+    background-color: rgba(255, 255, 255, 0.15);
+    cursor: not-allowed;
+}
+
+.card > .card-options li > button:not(.desable):hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.badge {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--light-gray);
+    color: var(--gray);
+    border-radius: 6px;
+    background-color: #F7F7F720;
+    padding: 2px 7px;
+    font-size: 0.8rem;
+}
+
+button.add{
+    background-color: #39FF14;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    width: 40px;
+    height: 40px;
+}
+
+button.add > svg {
+    width: 100%;
+    height: 100%;
+}
+
+dialog {
+    color: var(--color);
+    margin: auto;
+    padding: 12px;
+    background-color: var(--black-3);
+    width: 100%;
+    border-radius: 20px;
+}
+
+dialog::backdrop {
+    background-color: #14141475;
+}
+
+form.modal-content {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 20px;
+    position: relative;
+}
+
+form.modal-content > h2 {
+    font-family: "Hanken Grotesk", sans-serif;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+form.modal-content > button.close {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    padding: 0px;
+    background-color: var(--red);
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+}
+
+form.modal-content > button.close > svg {
+    color: var(--color);
+    width: 100%;
+    height: 100%;
+}
+
+form.modal-content > ul.color-options {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 300px;
+
+    & input {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+form.modal-content > ul.color-options button {
+    background-color: transparent;
+    border: none;
+}
+
+form.modal-content > ul.color-options label {
+    width: 40px;
+    height: 20px;
+    border: 1px solid var(--color);
+}
+
+form.modal-content textarea {
+    height: 100px;
+    white-space-collapse: break-spaces;
+    resize: none;
+}
+
+form.modal-content input[type="text"], form.modal-content textarea {
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    background-color: var(--black-4);
+    border: 1px solid var(--input-border-color);
+    color: var(--color);
+    outline: none;
+}
+
+form.modal-content input[type="text"]:focus {
+    outline: none;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+label > span.text-length {
+    align-self: flex-end;
+    margin-top: 5px;
+    font-weight: boldhn;
+    font-size: 0.75rem;
+    color: var(--gray);
+}
+
+label > span.text-error {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    color: var(--red);
+}
+
+label.switch {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    & input[type="checkbox"] {
+        width: 0px;
+        height: 0px;
+        opacity: 0;
+        visibility: hidden;
+    }
+    & .slider {
+        position: relative;
+        width: 40px;
+        height: 20px;
+        background-color: var(--light-gray);
+        border-radius: 10px;
+        transition: background-color 0.25s;
+    }
+    & .slider::after {
+        content: "";
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 16px;
+        height: 16px;
+        background-color: var(--color);
+        border-radius: 50%;
+        transform: translate(2px, 2px);
+        transition: transform 0.25s;
+    }
+    & input[type= "checkbox"]:checked {
+        & + .slider {
+            background-color: var(--green);
+        }
+        & + .slider::after {
+            transform: translate(22px, 2px);
+        }
+    }
+    & span {
+        display: inline-block;
+        padding-left: 10px;
+    }
+}
+
+form.modal-content > button {
+    border: none;
+    color: var(--black-1);
+    font-weight: bold;
+    padding: 10px 5px;
+}

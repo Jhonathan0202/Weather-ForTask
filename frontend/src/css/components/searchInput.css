@@ -1,0 +1,78 @@
+@import url("../index.css");
+
+div.search-input {
+    display: flex;
+    justify-self: center;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 0px 10px;
+    height: 35px;
+    width: 100%;
+}
+
+div.search-input svg {
+    fill: var(--color);
+}
+
+div.search-input > div {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    height: 100%;
+    background-color: var(--black-3);
+    border: 1px solid var(--input-border-color);
+    border-radius: 5px;
+    width: 100%;
+}
+
+div.search-input > div > svg.search-icon {
+    flex-shrink: 0;
+    margin-inline: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+div.search-input > div > button.clear-icon {
+    flex-shrink: 0;
+    background-color: transparent;
+    border: none;
+    width: 35px;
+    height: 100%;
+}
+
+div.search-input > div > button.clear-icon > svg {
+    width: 20px;
+    height: 20px;
+    margin: 0px;
+    padding: 0px;
+}
+
+div.search-input > div > input {
+    flex: 1;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    color: var(--color);
+    font-family: "Hanken Grotesk", sans-serif;
+    font-size: 0.9rem;
+    transition: border-color 0.2s ease-in-out;
+
+    &:focus {
+        outline: none;
+        border-color: var(--color);
+    }
+}
+
+div.search-input > button.filter-button {
+    background-color: var(--black-3);
+    border: 1px solid var(--input-border-color);
+    padding: 5px;
+    border-radius: 5px;
+    width: 40px;
+    height: 100%;
+    font-family: "Hanken Grotesk", sans-serif;
+    font-size: 0.9rem;
+}

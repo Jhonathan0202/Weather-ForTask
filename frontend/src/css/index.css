@@ -1,0 +1,139 @@
+@font-face {
+    font-family: "Hanken Grotesk";
+    src: url("../assets/fonts/Hanken_Grotesk/HankenGrotesk-Regular.ttf");
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../assets/fonts/Roboto/Roboto-Regular.ttf");
+    font-style: normal;
+}
+
+:root[dark-mode] {
+    --black-1: #0e1015;
+    --black-2: #181c25;
+    --black-3: #202531;
+    --black-4: #22242a;
+    --gray: #b8b8b8;
+    --light-gray: #525252;
+    --red: #ca3a3a;
+    --green: #6ad45e;
+    --color: #f7f7f7;
+    --highlight-color: #00d4ff;
+    
+    /* inputs */
+    --input-border-color: #ffffff1a;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.sr-only-focusable:active, .sr-only-focusable:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    height: 100%;
+}
+
+button {
+    cursor: pointer;
+}
+
+p, a, span, label, input, button, textarea {
+    font-family: "Roboto", sans-serif;
+    font-size: 0.9rem;
+}
+
+body > div {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
+    height: 100%;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: var(--black-1);
+    color: var(--color);
+}
+
+h1, h1 > span {
+    font-family: "Hanken Grotesk", sans-serif;
+    margin: auto;
+    padding: 10px 0px;
+    font-size: 1.4rem;
+}
+
+button {
+    cursor: pointer;
+}
+
+nav {
+    flex: 1 0;
+}
+
+nav ul {
+    display: flex;
+    padding-inline: 10px;
+    gap: 5px;
+    justify-content: space-around;
+    list-style: none;
+    height: 100%;
+    border-bottom: 2px solid var(--light-gray);
+}
+
+nav li {
+    margin-bottom: -2px;
+    width: 100%;
+}
+
+nav li a {
+    padding: 10px 25px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border: none;
+    color: var(--color);
+    font-weight: 500;
+}
+
+nav li a.active {
+    color: var(--highlight-color);
+    border-bottom: 2px solid var(--highlight-color);
+}
+
+main {
+    flex: 1 0;
+    color: var(--color);
+    background-color: var(--black-2);
+}
