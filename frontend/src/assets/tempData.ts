@@ -4,8 +4,8 @@ export const dataBlocks = [
     title: "Rotina Diária",
     description: "Tarefas essenciais para manter o dia organizado.",
     notifications: true,
-    color: "#4392F1", // Azul
-    tasks: [1, 2, 4],
+    color: "#2d8cff", // Azul
+    tasks: [1, 2, 3, 4, 5],
     countTasksDone: 1
   },
   {
@@ -13,7 +13,7 @@ export const dataBlocks = [
     title: "Lazer e Bem-estar",
     description: "Atividades ao ar livre e hobbies.",
     notifications: false,
-    color: "#26C485", // Verde Água
+    color: "#0EA53E", // Verde Água
     tasks: [3, 5],
     countTasksDone: 0
   },
@@ -22,7 +22,7 @@ export const dataBlocks = [
     title: "Trabalho / Projetos",
     description: "Foco total em entregas de software.",
     notifications: true,
-    color: "#ffc34b", // Vermelho
+    color: "#EC711F", // Vermelho
     tasks: [],
     countTasksDone: 0
   },
@@ -31,7 +31,7 @@ export const dataBlocks = [
     title: "Estudos",
     description: "Cursos online e leituras técnicas.",
     notifications: true,
-    color: "#DD722A", // Laranja
+    color: "#EC711F", // Laranja
     tasks: [4],
     countTasksDone: 0
   },
@@ -40,7 +40,7 @@ export const dataBlocks = [
     title: "Casa",
     description: "Manutenção e organização do lar.",
     notifications: false,
-    color: "#AC9FBB", // Roxo
+    color: "#bc86ff", // Roxo
     tasks: [1, 5],
     countTasksDone: 0
   }

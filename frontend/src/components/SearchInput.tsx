@@ -1,13 +1,13 @@
-import "../css/components/searchInput.css";
+//import "../css/components/searchInput.css";
 import type { SetStateAction, Dispatch } from "react";
 
 type searchInputProps = {
-    filterNum?: number;
-    isFilterOpen?: boolean;
-    setIsFilterOpen?: Dispatch<SetStateAction<boolean>>;
-    query: string;
-    setQuery: Dispatch<SetStateAction<string>>;
-    placeholder?: string;
+    filterNum?: number,
+    isFilterOpen?: boolean,
+    setIsFilterOpen?: Dispatch<SetStateAction<boolean>>,
+    query: string,
+    setQuery: Dispatch<SetStateAction<string>>,
+    placeholder?: string,
 };
 
 const SearchInput = ({
@@ -18,6 +18,13 @@ const SearchInput = ({
     setQuery,
     placeholder = "Pesquisar...",
 }: searchInputProps) => {
+
+    const countFiltersLabel = `Filtrar blocos${
+    filterNum && filterNum > 0 
+        ? `: (${filterNum}) filtr${filterNum > 1 ? 'os aplicados' : 'o aplicado'}` 
+        : ""
+    }`;
+
     return (
         <div className="search-input">
             <div>
@@ -56,19 +63,13 @@ const SearchInput = ({
             {setIsFilterOpen && (
                 <button
                     className="filter-button"
-                    aria-label={
-                        filterNum !== undefined && filterNum > 0 ?
-                        `Filtrar blocos (${filterNum})` : "Filtrar blocos"
-                    }
+                    aria-label={countFiltersLabel}
                     aria-pressed={isFilterOpen}
                     onClick={(): void => {
                         setIsFilterOpen((value: boolean): boolean => !value);
                     }}
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 -960 960 960"
-                    ><path d="M440-160q-17 0-28.5-11.5T400-200v-240L168-736q-15-20-4.5-42t36.5-22h560q26 0 36.5 22t-4.5 42L560-440v240q0 17-11.5 28.5T520-160h-80Zm40-308 198-252H282l198 252Zm0 0Z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M200-160v-280h-80v-80h240v80h-80v280h-80Zm0-440v-200h80v200h-80Zm160 0v-80h80v-120h80v120h80v80H360Zm80 440v-360h80v360h-80Zm240 0v-120h-80v-80h240v80h-80v120h-80Zm0-280v-360h80v360h-80Z"/></svg>
                     {
                         filterNum !== undefined && filterNum > 0 && (
                             <span className="filter-count">{filterNum > 9 ? "9+" : filterNum}</span>

@@ -1,26 +1,23 @@
-@import url("./index.css");
-
-/* Define custom variable for input border color */
-:root {
-    --input-border-color: #ffffff1a;
-}
-
-div.card-wrapper {
+ul.card-wrapper {
     margin: 10px;
-    display: flex;
-    flex-flow: column nowrap;
+    display: grid;
     gap: 10px;
+    grid-template-columns: 1fr;
+    list-style: none;
 }
 
 .card {
+    display: flex;
+    flex-flow: column nowrap;
     border-radius: 10px;
     overflow: hidden;
 }
 
-.card > .card-content {
+.card .card-content {
     display: flex;
     background-color: transparent;
     width: 100%;
+    height: 100%;
     border: none;
     color: var(--color);
     flex-flow: row nowrap;
@@ -32,6 +29,7 @@ div.card-wrapper {
         display: flex;
         flex-flow: column nowrap;
         align-items: baseline;
+        justify-content: space-evenly;
         gap: 5px;
         flex: 1;
         min-width: 0;
@@ -48,22 +46,29 @@ div.card-wrapper {
     }
 
     & p {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
-        color: #ffffff85;
+        color: #ffffffa6;
         text-overflow: ellipsis;
         overflow: hidden;
         text-align: left;
         max-height: 36px;
-        word-break: break-word;
     }
 
-    & > span{
+    & > svg{
         display: flex;
+        width: 30px;
         justify-content: center;
         align-items: center;
+        fill: var(--color);
+    }
+}
+
+@supports (display: -webkit-box) or (line-clamp: 2) {
+    .card .card-content p {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        word-break: break-word;
     }
 }
 
@@ -107,13 +112,7 @@ div.card-wrapper {
     color: #f85149;
 }
 
-.card > .card-options li > button.desable {
-    color: var(--gray);
-    background-color: rgba(255, 255, 255, 0.15);
-    cursor: not-allowed;
-}
-
-.card > .card-options li > button:not(.desable):hover {
+.card > .card-options li > button:hover {
     background-color: rgba(255, 255, 255, 0.05);
 }
 
@@ -125,7 +124,7 @@ div.card-wrapper {
     border: 1px solid var(--light-gray);
     color: var(--gray);
     border-radius: 6px;
-    background-color: #F7F7F720;
+    background-color: #3f3f3f20;
     padding: 2px 7px;
     font-size: 0.8rem;
 }
@@ -144,17 +143,20 @@ button.add > svg {
     height: 100%;
 }
 
-dialog {
+dialog.form-modal {
+    margin-bottom: 0px !important;
     color: var(--color);
     margin: auto;
     padding: 12px;
     background-color: var(--black-3);
-    width: 100%;
-    border-radius: 20px;
+    min-width: 100vw;
+    border-width: 1px 1px 0px 1px;
+    border-radius: 20px 20px 0px 0px;
 }
 
 dialog::backdrop {
     background-color: #14141475;
+    backdrop-filter: blur(3px);
 }
 
 form.modal-content {
@@ -164,9 +166,9 @@ form.modal-content {
     position: relative;
 }
 
-form.modal-content > h2 {
+dialog h2 {
     font-family: "Hanken Grotesk", sans-serif;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     font-size: 1.2rem;
 }
 
@@ -191,9 +193,9 @@ form.modal-content > button.close > svg {
 form.modal-content > ul.color-options {
     list-style-type: none;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
-    max-width: 300px;
+    max-width: 250px;
 
     & input {
         opacity: 0;
@@ -207,8 +209,9 @@ form.modal-content > ul.color-options button {
 }
 
 form.modal-content > ul.color-options label {
-    width: 40px;
+    width: 30px;
     height: 20px;
+    cursor: pointer;
     border: 1px solid var(--color);
 }
 
@@ -256,13 +259,8 @@ label > span.text-error {
 label.switch {
     display: flex;
     align-items: center;
+    cursor: pointer;
     flex-direction: row;
-    & input[type="checkbox"] {
-        width: 0px;
-        height: 0px;
-        opacity: 0;
-        visibility: hidden;
-    }
     & .slider {
         position: relative;
         width: 40px;
@@ -299,7 +297,11 @@ label.switch {
 
 form.modal-content > button {
     border: none;
-    color: var(--black-1);
+    max-width: 300px;
+    width: 100%;
+    border-radius: 10px;
+    margin: auto;
+    color: var(--color);
     font-weight: bold;
     padding: 10px 5px;
 }

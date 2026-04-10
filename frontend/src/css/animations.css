@@ -1,0 +1,28 @@
+button.pulse {
+    position: relative;
+    overflow: hidden;
+}
+
+button.pulse::after {
+    content: "";
+    position: absolute;
+    background: radial-gradient(
+        circle,
+        transparent 40%,
+        color-mix(in oklab, currentColor 30%, transparent 0%) 70%,
+        transparent 70%
+    );
+    inset: 0;
+    animation: 2.5s linear infinite pulse-color;
+}
+
+@keyframes pulse-color {
+    0% {
+        transform: scale(0.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}

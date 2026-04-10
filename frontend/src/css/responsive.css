@@ -1,0 +1,48 @@
+@import "blocks.css";
+@import "tasks.css";
+@import "components/alertDialog.css";
+@import "components/blockFilter.css";
+@import "components/searchInput.css";
+
+@media screen and (min-width: 660px) {
+    ul.card-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    dialog.form-modal {
+        margin-bottom: auto !important;
+        min-width: 650px;
+        border-width: 1px;
+        border-radius: 20px;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    ul.tasks-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    ul.card-wrapper {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    ul.tasks-wrapper {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    ul.card-wrapper {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (min-width: 1584px) {
+    ul.tasks-wrapper {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
