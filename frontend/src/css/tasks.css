@@ -1,0 +1,170 @@
+@import "./animations.css" (not (prefers-reduced-motion: reduce));
+
+header.block-details {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+}
+
+header.block-details > div {
+    display: flex;
+    align-self: start;
+    align-items: center;
+    flex-flow: row nowrap;
+    width: 100%;
+    gap: 15px;
+}
+
+header.block-details > div > h1 {
+    padding: 0px;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+header.block-details > div > button {
+    padding: 3px;
+    border: none;
+    background-color: var(--black-3);
+    fill: var(--color);
+    border-radius: 5px;
+    width: 25px;
+    height: 25px;
+}
+
+header.block-details > p {
+    color: #c9c9c9;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+@supports (display: -webkit-box) or (line-clamp: 2) {
+    header.block-details > p {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        word-break: break-word;
+    }
+}
+
+header.block-details > label {
+    display: flex;
+    align-self: start;
+    flex-flow: row nowrap;
+    width: 250px;
+    margin: auto;
+    align-items: center;
+    gap: 5px;
+    color: var(--color);
+}
+
+header.block-details > label > .progress-bar {
+    flex: 1;
+    background-color: var(--light-gray);
+    overflow: hidden;
+    border-radius: 10px;
+    height: 10px;
+}
+
+header.block-details > label > .progress-bar > div {
+    height: 100%;
+    transition: width 1s;
+}
+
+main button.btn-group {
+    align-self: flex-start;
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    color: var(--color);
+}
+
+ul.tasks-wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 10px;
+    list-style: none;
+}
+
+li.task-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--black-3);
+}
+
+div.task-details {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 5px;
+    flex: 1;
+    min-width: 0;
+}
+
+div.task-details > div {
+    align-items: center;
+    text-align: center;
+}
+
+div.task-details > h2 {
+    font-size: 1rem;
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    overflow: hidden;
+    font-family: "Hanken Grotesk", sans-serif;
+}
+
+li.task-item > input[type="checkbox"] {
+    accent-color: var(--highlight-color);
+    width: 17px;
+    height: 17px;
+}
+
+li.task-item > button.btn-option {
+    width: 30px;
+    height: 30px;
+    padding: 3px;
+    flex-shrink: 0;
+    background-color: #eee;
+    border-radius: 5px;
+    fill: var(--black-1);
+    border: none;
+}
+
+li.task-item > button.btn-option:hover {
+    background-color: #D6D6D6;
+}
+
+li.task-item > button.btn-option > svg {
+    width: 100%;
+    height: 100%;
+}
+
+li.task-item > button.btn-delete {
+    background-color: #e32525;
+    fill: var(--color);
+}
+
+li.task-item > button.btn-delete:hover {
+    background-color: #C71A1A;
+}
+
+li.done {
+    background-color: #172b1e;
+}
+
+li.done > input[type="checkbox"]:checked {
+    accent-color: #47CF73;
+}
+
+li.done > .task-details > h2 {
+    text-decoration: line-through;
+    color: #47CF73;
+}

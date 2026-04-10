@@ -1,0 +1,22 @@
+dialog.alert-box {
+    margin: auto;
+    border: none;
+    max-width: 350px;
+    box-shadow: 0px 0px 10px 5px var(--black-1);
+}
+
+dialog.alert-box > div {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 15px;
+    padding: 10px;
+    color: var(--color);
+    background-color: var(--black-3);
+}
+
+dialog.alert-box > div button {
+    border: none;
+    background-color: #575757;
+    color: var(--color);
+    padding: 5px 8px;
+}

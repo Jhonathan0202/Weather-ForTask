@@ -32,7 +32,7 @@ const Headers = (): JSX.Element => {
                     </ul>
                 </nav>
             </header>
-            {<Outlet/>}
+            <Outlet />
         </>
     );
 };

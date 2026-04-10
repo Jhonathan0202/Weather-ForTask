@@ -1,12 +1,14 @@
 import type { CSSProperties, JSX, Dispatch, SetStateAction } from "react";
 import type { Block } from "../../types/types";
 import { useNavigate } from "react-router";
+import { blockColors } from "../../types/colors";
 
 type CardBlockProps = {
     block: Block;
     selectedIdBlock: number | null;
     setSelectedIdBlock: Dispatch<SetStateAction<number | null>>;
     setIsDialogOpen: Dispatch<SetStateAction<boolean>>;
+    onDelete?: () => void;
 };
 
 const CardBlock = (props: CardBlockProps): JSX.Element => {
@@ -18,7 +20,11 @@ const CardBlock = (props: CardBlockProps): JSX.Element => {
     };
 
     return (
-        <div className="card" style={blockStyle} key={props.block.id}>
+        <article
+            className="card"
+            style={blockStyle}
+            key={props.block.id}
+        >
             <button
                 type="button"
                 className="card-content"
@@ -27,6 +33,13 @@ const CardBlock = (props: CardBlockProps): JSX.Element => {
                         ? { borderBottom: `1px solid ${props.block.color}` }
                         : undefined
                 }
+                aria-label={`Bloco da categoria ${
+                    Object.keys(blockColors).find(
+                        (key) =>
+                            blockColors[key as keyof typeof blockColors] ===
+                            props.block.color,
+                    ) ?? "Desconhecida"
+                }`}
                 aria-expanded={props.selectedIdBlock === props.block.id}
                 onClick={() => {
                     props.setSelectedIdBlock(
@@ -57,34 +70,34 @@ const CardBlock = (props: CardBlockProps): JSX.Element => {
                             {props.block.tasks.length}
                         </span>
                         {props.block.notifications && (
-                            // Ícone do fonts.google.com de sino modificado para ter cor sólida
+                            // Ícone de notificação do fonts.google.com modificado
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 aria-label="Notificações habilitadas"
+                                height="20px"
+                                width="20px"
                                 viewBox="0 -960 960 960"
                                 fill="#fddc5f"
-                                style={{
-                                    height: "20px",
-                                    width: "20px",
-                                }}
                             >
-                                <path d="M80-560q0-100 44.5-183.5T244-882l47 64q-60 44-95.5 111T160-560zM480-80q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80M160-200v-80h80v-280q0-100 70-170t170-70 170 70 70 170v280h80v80z" />
-                                <path d="M80-560q0-100 44.5-183.5T244-882l47 64q-60 44-95.5 111T160-560zm720 0q0-80-35.5-147T669-818l47-64q75 55 119.5 138.5T880-560zM160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880t42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80zM480-80q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80M320-280h320v-280q0-66-47-113t-113-47-113 47-47 113z" />
+                                <path d="M160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80H160ZM480-80q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM80-560q0-100 44.5-183.5T244-882l47 64q-60 44-95.5 111T160-560H80Zm720 0q0-80-35.5-147T669-818l47-64q75 55 119.5 138.5T880-560h-80Z"/>
                             </svg>
                         )}
                     </div>
                 </div>
-                <span
+                {/* Ícone de seta para baixo do fonts.google.com modificado */}
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 -960 960 960"
                     style={
-                        props.selectedIdBlock === props.block.id
+                    props.selectedIdBlock === props.block.id
                             ? { transform: "rotate(180deg)" }
                             : undefined
                     }
                 >
-                    ▼
-                </span>
+                    <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/>
+                </svg>
             </button>
-            <div
+            <section
                 className={
                     "card-options" +
                     (props.selectedIdBlock === props.block.id ? " active" : "")
@@ -99,11 +112,12 @@ const CardBlock = (props: CardBlockProps): JSX.Element => {
                     >
                         <button
                             type="button"
-                            className={
-                                props.block.tasks.length === 0 ? "desable" : ""
-                            }
                             onClick={(): void => {
-                                props.block.tasks.length > 0 ? navigator(`block/${props.block.id}/tasks`) : undefined
+                                navigator(`block/${props.block.id}/tasks`, {
+                                    state: {
+                                        block: props.block,
+                                    },
+                                })
                             }}
                         >
                             Visualizar tarefas
@@ -122,12 +136,13 @@ const CardBlock = (props: CardBlockProps): JSX.Element => {
                     </li>
                     <li
                         style={{ borderLeft: `1px solid ${props.block.color}` }}
+                        onClick={props.onDelete}
                     >
                         <button type="button">Excluir</button>
                     </li>
                 </ul>
-            </div>
-        </div>
+            </section>
+        </article>
     );
 };
 

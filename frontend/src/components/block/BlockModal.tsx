@@ -5,9 +5,10 @@ import {
     type Dispatch,
     type JSX,
     type SetStateAction,
+    type SubmitEvent,
 } from "react";
 import type { Block } from "../../types/types.tsx";
-import { blockColors } from "../../constants/colors.ts";
+import { blockColors } from "../../types/colors.ts";
 
 type BlockModalProps = {
     blocks: Block[];
@@ -107,19 +108,15 @@ const BlockModal = (props: BlockModalProps): JSX.Element => {
 
     return (
         <dialog
-            className="modal-block"
-            aria-label={
-                props.selectedIdBlock !== null
-                    ? "Editar bloco de tarefas"
-                    : "Criar bloco de tarefas"
-            }
+            className="form-modal"
+            aria-labelledby="formTitle"
             ref={modalDialog}
             style={{
-                border: `2px solid ${formData.color}4D`
+                borderColor: `${formData.color}4D`,
             }}
         >
-            <form action={props.selectedIdBlock !== null ? editBlock : addBlock} className="modal-content">
-                <h2 style={{ color: formData.color }}>
+            <form onSubmit={handleFormSubmit} className="modal-content">
+                <h2 id="formTitle" style={{ color: formData.color }}>
                     {props.selectedIdBlock !== null
                         ? "Editar bloco de tarefas"
                         : "Criar bloco de tarefas"}
@@ -143,35 +140,34 @@ const BlockModal = (props: BlockModalProps): JSX.Element => {
                         <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
                     </svg>
                 </button>
-                <ul className="color-options">
-                    {
-                        Object.entries(blockColors).map(
-                            ([key, color]) => (
-                                <li key={key}>
-                                    <label
-                                        style={{
-                                            backgroundColor: color,
-                                            boxShadow:
-                                                formData.color === color
-                                                    ? `0 0 8px 2px ${color}`
-                                                    : "none",
-                                        }}
-                                    >
-                                        <input
-                                            type="radio"
-                                            name="color"
-                                            value={color}
-                                            checked={formData.color === color}
-                                            onChange={() => {
-                                                if (formData.color !== color)
-                                                    setFormData({ ...formData, color });
-                                            }}
-                                        />
-                                    </label>
-                                </li>
-                            )
-                        )
-                    }
+                <ul
+                    className="color-options"
+                    aria-label="Selecione a cor do bloco"
+                >
+                    {Object.entries(blockColors).map(([key, color]) => (
+                        <li key={key}>
+                            <label
+                                style={{
+                                    backgroundColor: color,
+                                    boxShadow:
+                                        formData.color === color
+                                            ? `0 0 8px 2px ${color}`
+                                            : "none",
+                                }}
+                            >
+                                <input
+                                    type="radio"
+                                    name="color"
+                                    value={color}
+                                    checked={formData.color === color}
+                                    onChange={() => {
+                                        if (formData.color !== color)
+                                            setFormData({ ...formData, color });
+                                    }}
+                                />
+                            </label>
+                        </li>
+                    ))}
                 </ul>
                 <label>
                     <input
@@ -255,6 +251,8 @@ const BlockModal = (props: BlockModalProps): JSX.Element => {
                     <input
                         type="checkbox"
                         name="notify"
+                        role="switch"
+                        className="sr-only"
                         checked={formData.notifications}
                         onChange={(): void =>
                             setFormData((data) => ({
@@ -276,8 +274,9 @@ const BlockModal = (props: BlockModalProps): JSX.Element => {
                 <button
                     type="submit"
                     style={{ backgroundColor: `${formData.color}` }}
+                    onClick={props.selectedIdBlock !== null ? editBlock : addBlock}
                 >
-                    {props.selectedIdBlock !== null ? "Salvar" : "Criar"}
+                    {props.selectedIdBlock !== null ? "Salvar" : "Criar"} bloco
                 </button>
             </form>
         </dialog>
@@ -288,6 +287,11 @@ const BlockModal = (props: BlockModalProps): JSX.Element => {
             const { [key]: _, ...rest } = formErrors;
             setFormErrors(rest);
         }
+    }
+
+    function handleFormSubmit(e: SubmitEvent<HTMLFormElement>): void {
+        e.preventDefault();
+        props.selectedIdBlock !== null ? editBlock : addBlock;
     }
 
     function editBlock(): void {
@@ -312,9 +316,12 @@ const BlockModal = (props: BlockModalProps): JSX.Element => {
     }
 
     function addBlock(): void {
+        console.log("Antes de validar", formData);
         if (!validateForm()) {
             return;
         }
+
+        console.log("dfgdfgdfgdfgfdg")
 
         props.setBlocks((prev) => [
             ...prev,

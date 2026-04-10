@@ -57,6 +57,7 @@
 
 body {
     min-height: 100vh;
+    min-height: 100svh;
     height: 100%;
 }
 
@@ -75,9 +76,10 @@ body > div {
     flex: 1 0;
     height: 100%;
     min-height: 100vh;
+    min-height: 100svh;
 }
 
-header {
+div#root > header {
     display: flex;
     flex-flow: column nowrap;
     background-color: var(--black-1);
