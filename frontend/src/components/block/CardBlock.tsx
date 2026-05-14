@@ -65,7 +65,7 @@ const CardBlock = (props: CardBlockProps): JSX.Element => {
                             flexFlow: "row nowrap",
                         }}
                     >
-                        <span className="badge">
+                        <span className="badge details">
                             Tarefas: {props.block.countTasksDone}/
                             {props.block.tasks.length}
                         </span>

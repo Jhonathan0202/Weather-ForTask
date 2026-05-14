@@ -51,6 +51,7 @@ export const dataTasks = [
     id: 1,
     title: "Comprar ingredientes para o jantar",
     scheduledDate: new Date("2026-03-15T18:00:00"),
+    notifications: false,
     consultWeather: false,
     done: false
   },
@@ -58,6 +59,7 @@ export const dataTasks = [
     id: 2,
     title: "Treino de perna na academia",
     scheduledDate: new Date("2026-03-13T07:00:00"),
+    notifications: true,
     consultWeather: false,
     done: true
   },
@@ -65,6 +67,7 @@ export const dataTasks = [
     id: 3,
     title: "Caminhada no parque",
     scheduledDate: new Date("2026-03-14T16:30:00"),
+    notifications: true,
     consultWeather: true,
     done: false
   },
@@ -72,6 +75,7 @@ export const dataTasks = [
     id: 4,
     title: "Leitura do capítulo 5 de Clean Code",
     scheduledDate: new Date("2026-03-13T20:00:00"),
+    notifications: true,
     consultWeather: false,
     done: false
   },
@@ -79,6 +83,7 @@ export const dataTasks = [
     id: 5,
     title: "Lavar o carro",
     scheduledDate: new Date("2026-03-16T09:00:00"),
+    notifications: false,
     consultWeather: true,
     done: false
   }

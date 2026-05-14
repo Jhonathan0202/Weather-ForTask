@@ -1,12 +1,12 @@
 @font-face {
     font-family: "Hanken Grotesk";
-    src: url("../assets/fonts/Hanken_Grotesk/HankenGrotesk-Regular.ttf");
+    src: url("../fonts/Hanken_Grotesk/HankenGrotesk-Regular.ttf");
     font-style: normal;
 }
 
 @font-face {
     font-family: "Roboto";
-    src: url("../assets/fonts/Roboto/Roboto-Regular.ttf");
+    src: url("../fonts/Roboto/Roboto-Regular.ttf");
     font-style: normal;
 }
 
@@ -53,6 +53,11 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+}
+
+dialog::backdrop {
+    background-color: color-mix(in oklab, #14141475 70%, transparent);
+    backdrop-filter: blur(3px);
 }
 
 body {
@@ -113,6 +118,22 @@ nav ul {
     height: 100%;
 }
 
+nav ul::after {
+    content: "";
+    position: absolute;
+    left: anchor(left);
+    right: anchor(right);
+    bottom: anchor(bottom);
+    height: 2px;
+    background-color: var(--highlight-color);
+
+    position-anchor: --hovered-link;
+}
+
+nav li:has(a.active) {
+    anchor-name: --hovered-link;
+}
+
 nav li {
     margin-bottom: -2px;
     width: 100%;
@@ -129,11 +150,11 @@ nav li a {
     border: none;
     color: var(--color);
     font-weight: 500;
+    transition: color 0.3s;
 }
 
 nav li a.active {
     color: var(--highlight-color);
-    border-bottom: 2px solid var(--highlight-color);
 }
 
 main {

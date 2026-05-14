@@ -3,6 +3,7 @@ export type Task = {
     title: string
     scheduledDate: Date
     consultWeather: boolean
+    notifications: boolean
     done: boolean
 }
 

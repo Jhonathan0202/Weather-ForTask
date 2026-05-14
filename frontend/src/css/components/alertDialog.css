@@ -1,22 +1,90 @@
 dialog.alert-box {
     margin: auto;
     border: none;
-    max-width: 350px;
-    box-shadow: 0px 0px 10px 5px var(--black-1);
+    max-width: 360px;
+    background-color: transparent;
 }
 
 dialog.alert-box > div {
     display: flex;
     flex-flow: column nowrap;
-    gap: 15px;
-    padding: 10px;
+    margin: 10px;
+    border: 2px solid #404E63;
+    border-radius: 10px;
+    gap: 16px;
+    padding: 20px;
     color: var(--color);
     background-color: var(--black-3);
 }
 
-dialog.alert-box > div button {
+dialog.alert-box div.content {
+    display: flex;
+    justify-content: space-between;
+    min-width: 0;
+    gap: 12px;
+    width: 100%;
+}
+
+dialog.alert-box div.content > svg.status-icon {
+    height: 36px;
+    width: 36px;
+    padding: 8px;
+    border-radius: 50%;
+    flex: 0 0 auto;
+}
+
+dialog.alert-box svg.status-icon.delete, dialog.alert-box svg.status-icon.error {
+    background-color: #ff64671a;
+}
+
+dialog.alert-box svg.status-icon.warning {
+    background-color: #fff0661a;
+}
+
+dialog.alert-box svg.status-icon.info {
+    background-color: #00b8db1a;
+}
+
+@supports(color: color-mix(in lab, red, red)) {
+    dialog.alert-box svg.status-icon.delete, dialog.alert-box svg.status-icon.error {
+        background-color: color-mix(in oklab, #ff6467 10%, transparent);
+    }
+    
+    dialog.alert-box svg.status-icon.warning {
+        background-color: color-mix(in oklab, #FFF066 10%, transparent);
+    }
+    
+    dialog.alert-box svg.status-icon.info {
+        background-color: color-mix(in oklab, #00b8db 10%, transparent);
+    }
+}
+
+dialog.alert-box div.content > button.close {
+    background-color: transparent;
     border: none;
-    background-color: #575757;
+    padding: 0px;
+    height: 30px;
+    width: 30px;
+    padding: 5px;
+    flex: 0 0 auto;
+}
+
+dialog.alert-box div.content > button.close svg {
+    height: 100%;
+    width: 100%;
+}
+
+dialog.alert-box div.options {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 10px;
+}
+
+dialog.alert-box div.options > button {
+    border: none;
     color: var(--color);
-    padding: 5px 8px;
+    background-color: transparent;
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 10px;
 }

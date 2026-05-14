@@ -6,6 +6,11 @@ ul.card-wrapper {
     list-style: none;
 }
 
+ul.card-wrapper > li {
+    min-width: 0;
+    width: 100%;
+}
+
 .card {
     display: flex;
     flex-flow: column nowrap;
@@ -30,7 +35,7 @@ ul.card-wrapper {
         flex-flow: column nowrap;
         align-items: baseline;
         justify-content: space-evenly;
-        gap: 5px;
+        gap: 10px;
         flex: 1;
         min-width: 0;
     }
@@ -94,7 +99,6 @@ ul.card-wrapper {
     justify-content: center;
     align-items: center;
     width: 40px;
-    height: 40px;
     background-color: transparent;
     border: none;
 }
@@ -104,6 +108,7 @@ ul.card-wrapper {
     font-weight: 600;
     color: var(--color);
     border: none;
+    padding: 10px;
     width: 100%;
     height: 100%;
 }
@@ -129,6 +134,15 @@ ul.card-wrapper {
     font-size: 0.8rem;
 }
 
+.badge.details {
+    background-color: #3e3e53;
+    border: none;
+    color: var(--highlight-color);
+    border-radius: 6px;
+    padding: 2px 7px;
+    font-size: 0.8rem;
+}
+
 button.add{
     background-color: #39FF14;
     border: none;
@@ -150,13 +164,8 @@ dialog.form-modal {
     padding: 12px;
     background-color: var(--black-3);
     min-width: 100vw;
-    border-width: 1px 1px 0px 1px;
+    border-width: 2px 2px 0px 2px;
     border-radius: 20px 20px 0px 0px;
-}
-
-dialog::backdrop {
-    background-color: #14141475;
-    backdrop-filter: blur(3px);
 }
 
 form.modal-content {
@@ -231,7 +240,7 @@ form.modal-content input[type="text"], form.modal-content textarea {
     outline: none;
 }
 
-form.modal-content input[type="text"]:focus {
+form.modal-content input:focus {
     outline: none;
 }
 
@@ -260,7 +269,8 @@ label.switch {
     display: flex;
     align-items: center;
     cursor: pointer;
-    flex-direction: row;
+    flex-flow: row nowrap;
+    gap: 10px;
     & .slider {
         position: relative;
         width: 40px;
@@ -291,7 +301,6 @@ label.switch {
     }
     & span {
         display: inline-block;
-        padding-left: 10px;
     }
 }
 

@@ -9,7 +9,6 @@ export function diffInSecs(date: Date): number {
 }
 
 export function diffInDays(date: Date): number {
-    
     const today = new Date();
 
     const diffTime = date.getTime() - today.getTime();
@@ -19,21 +18,22 @@ export function diffInDays(date: Date): number {
 }
 
 export function formatTime(date: Date): string {
-    
     const hours = String(date.getHours()).padStart(2, "0");
     const minutes = String(date.getMinutes()).padStart(2, "0");
     const seconds = String(date.getSeconds()).padStart(2, "0");
-
     return `${hours}:${minutes}:${seconds}`;
 }
 
-export function formatDate(date: Date): string {
-    
+export function formatDate(date: Date, type: "pt-BR" | "en-US"): string {
     const days = String(date.getDate()).padStart(2, "0");
     const months = String(date.getMonth() + 1).padStart(2, "0");
     const years = String(date.getFullYear());
 
-    return `${days}/${months}/${years}`;
+    if (type === "pt-BR") {
+        return `${days}/${months}/${years}`;
+    } else {
+        return `${years}-${months}-${days}`;
+    }
 }
 
 export function dateAdd(date: Date, days: number): Date {
@@ -44,4 +44,13 @@ export function dateAdd(date: Date, days: number): Date {
         today.getHours(),
         today.getMinutes(),
         today.getSeconds());
+}
+
+export function stringToDatetime(date: string, time: string): Date {
+    const [year, month, day] = date.split("-").map(Number);
+    const timeParts = time.split(":").map(Number);
+    const hours = timeParts[0];
+    const minutes = timeParts[1];
+    const seconds = timeParts[2] || 0;
+    return new Date(year, month - 1, day, hours, minutes, seconds);
 }

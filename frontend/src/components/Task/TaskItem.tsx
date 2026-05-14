@@ -8,15 +8,16 @@ type TaskItemProps = {
     tasks: SetStateAction<Task[]>,
     setSelectedIdTask: Dispatch<SetStateAction<null | number>>,
     setIsAlertOpen: Dispatch<SetStateAction<boolean>>,
+    setIsDialogOpen: Dispatch<SetStateAction<boolean>>,
 }
 
 const TaskItem = (props: TaskItemProps): JSX.Element => {
-
+    
     const diffDays: number = dataHandler.diffInDays(props.task.scheduledDate);
     
     const scaduledDate: string =
         diffDays > 31 || diffDays < 0
-            ? dataHandler.formatDate(props.task.scheduledDate)
+            ? dataHandler.formatDate(props.task.scheduledDate, "pt-BR")
             : diffDays > 0
                 ? `${diffDays} dia(s) restantes`
                 : dataHandler.formatTime(props.task.scheduledDate);
@@ -57,10 +58,10 @@ const TaskItem = (props: TaskItemProps): JSX.Element => {
                         flexDirection: "row",
                     }}
                 >
-                    <span className="badge">{scaduledDate}</span>
+                    <span className="badge details">{scaduledDate}</span>
                     {props.task.consultWeather && (
-                        <span className="badge weather">
-                            Consultar previsão do tempo
+                        <span className="badge weather details">
+                            Consultar o clima
                         </span>
                     )}
                 </div>
@@ -71,7 +72,7 @@ const TaskItem = (props: TaskItemProps): JSX.Element => {
                 aria-label="Editar tarefa"
                 onClick={() => {
                     props.setSelectedIdTask(props.task.id);
-                    alert("Em Construção.");
+                    props.setIsDialogOpen(true);
                 }}
             >
                 {/* Ícone de editar do fonts.google.com modificado */}

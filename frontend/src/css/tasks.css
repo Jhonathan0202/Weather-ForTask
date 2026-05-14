@@ -12,20 +12,27 @@ header.block-details > div {
     align-self: start;
     align-items: center;
     flex-flow: row nowrap;
-    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     gap: 15px;
 }
 
 header.block-details > div > h1 {
     padding: 0px;
-    flex: 1;
     overflow: hidden;
+    flex: 1;
+    min-width: 0;
+    margin: 0px;
+    text-align: center;
     text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1.3rem;
 }
 
 header.block-details > div > button {
     padding: 3px;
     border: none;
+    flex-shrink: 0;
     background-color: var(--black-3);
     fill: var(--color);
     border-radius: 5px;
@@ -69,7 +76,6 @@ header.block-details > label > .progress-bar {
 
 header.block-details > label > .progress-bar > div {
     height: 100%;
-    transition: width 1s;
 }
 
 main button.btn-group {
@@ -94,6 +100,7 @@ li.task-item {
     padding: 10px;
     border-radius: 5px;
     max-width: 460px;
+    min-width: 0;
     width: 100%;
     margin: auto;
     background-color: var(--black-3);
@@ -102,6 +109,7 @@ li.task-item {
 div.task-details {
     display: flex;
     flex-flow: column nowrap;
+    overflow: hidden;
     gap: 5px;
     flex: 1;
     min-width: 0;
@@ -168,4 +176,21 @@ li.done > input[type="checkbox"]:checked {
 li.done > .task-details > h2 {
     text-decoration: line-through;
     color: #47CF73;
+}
+
+div.date-time {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 10px;
+}
+
+div.date-time > input {
+    padding: 5px;
+    color-scheme: dark;
+    border-radius: 5px;
+    width: 100%;
+    background-color: var(--black-4);
+    border: 1px solid var(--input-border-color);
+    color: var(--color);
+    outline: none;
 }

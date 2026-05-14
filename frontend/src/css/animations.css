@@ -1,3 +1,15 @@
+nav ul::after {
+    transition: right 0.3s, left 0.3s;
+}
+
+div#root header nav ul > li::before {
+    transition: height 0.2s ease-in-out;
+}
+
+header.block-details > label > .progress-bar > div {
+    transition: width 1s;
+}
+
 button.pulse {
     position: relative;
     overflow: hidden;

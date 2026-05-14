@@ -166,7 +166,8 @@ const Home = ({ blocks, setBlocks }: HomeProps): JSX.Element => {
                     setIsAlertOpen={setIsAlertOpen}
                     title="Deseja excluir este bloco?"
                     confirmButtonText="Excluir"
-                    color="var(--red)"
+                    color="#E7000B"
+                    type="delete"
                     onConfirm={deleteBlock}
                 >
                     Uma vez excluído não sera possível recuperar o bloco ou suas

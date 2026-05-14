@@ -109,14 +109,14 @@ const BlockModal = (props: BlockModalProps): JSX.Element => {
     return (
         <dialog
             className="form-modal"
-            aria-labelledby="formTitle"
+            aria-labelledby="form-block-title"
             ref={modalDialog}
             style={{
                 borderColor: `${formData.color}4D`,
             }}
         >
             <form onSubmit={handleFormSubmit} className="modal-content">
-                <h2 id="formTitle" style={{ color: formData.color }}>
+                <h2 id="form-block-title" style={{ color: formData.color }}>
                     {props.selectedIdBlock !== null
                         ? "Editar bloco de tarefas"
                         : "Criar bloco de tarefas"}

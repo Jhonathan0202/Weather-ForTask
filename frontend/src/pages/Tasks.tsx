@@ -1,6 +1,5 @@
 import { useEffect, useState, type Dispatch, type JSX, type SetStateAction } from "react";
 import type { Task, Block } from "../types/types";
-import { dataTasks } from "../assets/tempData";
 import { useNavigate, useParams } from "react-router";
 import SearchInput from "../components/SearchInput";
 import AlertBox from "../components/AlertBox";
@@ -10,29 +9,25 @@ import TaskModal from "../components/Task/TaskModal";
 type TaskProps = {
     blocks: Block[],
     setBlocks: Dispatch<SetStateAction<Block[]>>,
+    tasks: Task[],
+    setTasks: Dispatch<SetStateAction<Task[]>>,
 }
 
-const Tasks = ({ blocks, setBlocks }: TaskProps): JSX.Element => {
+const Tasks = ({ blocks, setBlocks, tasks, setTasks }: TaskProps): JSX.Element => {
     const { blockId } = useParams<{ blockId: string }>();
     const [query, setQuery] = useState<string>("");
-    const [tasks, setTasks] = useState<Task[]>([]);
     const [selectedIdTask, setSelectedIdTask] = useState<number | null>(null);
     const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
     const [isAlertOpen, setIsAlertOpen] = useState<boolean>(false);
-    const [block, setBlock] = useState<Block>();
+    const [block, setBlock] = useState<Block | null>(null);
     const navigate = useNavigate();
 
     useEffect((): void => {
         const foundBlock = blocks.find(
             (b: Block): boolean => b.id === parseInt(blockId ? blockId : "0"),
         );
-        setBlock(foundBlock);
-        setTasks(
-            dataTasks.filter((t: Task): boolean | undefined =>
-                foundBlock?.tasks.includes(t.id),
-            ),
-        );
-    }, [blockId, blocks]);
+        foundBlock && setBlock(foundBlock);
+    }, []);
 
     const filteredTasks = (): Task[] => {
         if (query.trim() === "") return tasks;
@@ -51,6 +46,7 @@ const Tasks = ({ blocks, setBlocks }: TaskProps): JSX.Element => {
             task={task}
             tasks={tasks}
             setIsAlertOpen={setIsAlertOpen}
+            setIsDialogOpen={setIsDialogOpen}
             setTasks={setTasks}
             setSelectedIdTask={setSelectedIdTask}
         />
@@ -104,6 +100,60 @@ const Tasks = ({ blocks, setBlocks }: TaskProps): JSX.Element => {
 
     const numDoneTasks: number = tasks.length > 0 ? tasks.filter((t: Task): boolean => t.done).length : 0;
     const porcentDone: number = tasks.length > 0 ? Math.round((numDoneTasks / tasks.length) * 100) : 0;
+
+    if (!block) {
+        return (
+            <>
+                <header className="block-details">
+                    <h1
+                        style={{
+                            margin: "0px auto",
+                            padding: "0px",
+                            textAlign: "center"
+                        }}
+                    >
+                        Bloco não encontrado.
+                    </h1>
+                </header>
+                <main style={{display: "flex", flexFlow: "column nowrap", placeContent: "center", gap: "20px", alignItems: "center"}}>
+                    <p
+                        style={{
+                            textAlign: "center"
+                        }}
+                    >
+                        Parece que o bloco não existe ou foi excluído.
+                        Sinto muito pelo incomodo. Por favor, verifique se o url está correto ou tente acessar outro bloco. <br />
+                        Por favor, volte para a página inicial para ver os blocos disponíveis.
+                    </p>
+                    <button
+                        aria-label="Voltar para a página inicial"
+                        className="pulse"
+                        onClick={() => navigate("/")}
+                        style={{
+                            width: "40px",
+                            height: "40px",
+                            backgroundColor: "var(--black-1)",
+                            border: "2px solid var(--black-4)",
+                            borderRadius: "10px",
+                            fill: "var(--highlight-color)",
+                            color: "var(--highlight-color)",
+                            padding: "3px",
+                            display: "flex",
+                            placeContent: "center",
+                        }}
+                    >
+                        {/* Ícone home do fonts.google.com modificado */}
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 -960 960 960"
+                        >
+                            <path d="M160-120v-480l320-240 320 240v480H560v-280H400v280H160Z"/>
+                        </svg>
+                    </button>
+                </main>
+            </>
+        );
+    }
 
     return (
         <>
@@ -170,7 +220,7 @@ const Tasks = ({ blocks, setBlocks }: TaskProps): JSX.Element => {
                     <SearchInput
                         query={query}
                         setQuery={setQuery}
-                        placeholder="Pesquisar task..."
+                        placeholder="Pesquisar tarefa..."
                     />
                 }
                 <button
@@ -204,31 +254,48 @@ const Tasks = ({ blocks, setBlocks }: TaskProps): JSX.Element => {
                     setIsAlertOpen={setIsAlertOpen}
                     title="Deseja excluir esta tarefa?"
                     confirmButtonText="Excluir"
+                    type="delete"
                     color="var(--red)"
                     onConfirm={deleteTask}
                 >
                     Uma vez excluida não há como recuperar a tarefa.
                 </AlertBox>
-                <TaskModal
-                    block={block}
-                    setBloks={setBlocks}
-                    isDialogOpen={isDialogOpen}
-                    setIsDialogOpen={setIsDialogOpen}
-                    onEdit={editTask}
-                    onAdd={addTask}
-                />
+                {
+                block &&
+                    <TaskModal
+                        block={block}
+                        isDialogOpen={isDialogOpen}
+                        setIsDialogOpen={setIsDialogOpen}
+                        onEdit={editTask}
+                        onAdd={addTask}
+                        tasks={tasks}
+                        setTasks={setTasks}
+                        selectedIdTask={selectedIdTask}
+                        setSelectedIdTask={setSelectedIdTask}
+                    />
+                }
             </main>
         </>
     );
 
-    function editTask(): void {
+    function editTask(task: Task): void {
         if(selectedIdTask === null) return;
-        // TODO: Implementar função de editar tarefa
-        setSelectedIdTask(null);
+        
+        setTasks((prevTasks: Task[]) =>
+            prevTasks.map((t: Task) => (t.id === selectedIdTask ? task : t))
+        );
     }
 
-    function addTask(): void {
-        // TODO: Implementar função de adição
+    function addTask(task: Task): void {
+        setTasks((prevTasks: Task[]) => [...prevTasks, task]);
+
+        setBlocks((prevBlocks: Block[]) =>
+            prevBlocks.map((block: Block) =>
+                block.id.toString() === blockId
+                    ? { ...block, tasks: [...block.tasks, task.id] }
+                    : block
+            )
+        );
     }
 
     function deleteTask(): void {
@@ -250,5 +317,7 @@ const Tasks = ({ blocks, setBlocks }: TaskProps): JSX.Element => {
 
         setSelectedIdTask(null);
     }
+
+    
 };
 export default Tasks;

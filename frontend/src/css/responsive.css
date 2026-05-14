@@ -12,14 +12,92 @@
     dialog.form-modal {
         margin-bottom: auto !important;
         min-width: 650px;
-        border-width: 1px;
+        border-width: 2px;
         border-radius: 20px;
+    }
+
+    dialog.alert-box {
+        max-width: 420px;
+    }
+
+    dialog.alert-box > div {
+        padding: 24px;
+        gap: 25px;
+    }
+
+    dialog.alert-box div.content {
+        gap: 16px;
+    }
+
+    dialog.alert-box div.options {
+        flex-flow: row nowrap;
+        justify-content: space-between;
+    }
+
+    dialog.alert-box div.options > button {
+        width: fit-content;
     }
 }
 
 @media screen and (min-width: 800px) {
+    nav ul::after {
+        content: none;
+    }
+    nav li:has(a.active) {
+        anchor-name: none;
+    }
     ul.tasks-wrapper {
         grid-template-columns: repeat(2, 1fr);
+    }
+    div#root > header {
+        flex-flow: row nowrap;
+        justify-content: space-between;
+
+        & p {
+            text-align: center;
+        }
+    }
+    div#root > header h1 {
+        margin: 5px 10px;
+        width: fit-content;
+    }
+    div#root > header nav {
+        border: none;
+        width: fit-content;
+
+        & ul {
+            gap: 0;
+        }
+        & > ul > li {
+            position: relative;
+            background-color: transparent;
+            z-index: 0;
+        }
+        & > ul > li::before {
+            content: "";
+            position: absolute;
+            display: block;
+            bottom: 0;
+            left: 0;
+            height: 0%;
+            width: 100%;
+            background-color: var(--black-2);
+            border-radius: 50% 50% 0px 0px;
+            z-index: -1;
+        }
+        & > ul > li:has(a.active) {
+            color: var(--color);
+        }
+        & > ul > li:has(a.active)::before {
+            height: 100%;
+        }
+        & a.active {
+            border: none;
+        }
+    }
+
+    header.block-details > label{
+        align-self: center;
     }
 }
 
